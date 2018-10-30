@@ -1,12 +1,17 @@
 require 'httparty'
-
+require 'pry'
+require 'awesome_print'
 #Starter Code:
-seven_wonders = ["Great Pyramid of Giza", "Hanging Gardens of Babylon", "Colossus of Rhodes", "Pharos of Alexandria", "Statue of Zeus at Olympia", "Temple of Artemis", "Mausoleum at Halicarnassus"]
+seven_wonders = ["Great Pyramid of Giza", "Ishtar Gate", "Colossus of Rhodes", "Pharos of Alexandria", "Statue of Zeus at Olympia", "Temple of Artemis", "Mausoleum at Halicarnassus"]
 
+longlat = {}
+seven_wonders.each do |place|
+  response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{place}&key=AIzaSyAXJXJGTmNK53O6KaXI5NG78n0ggUDowP0")
+  #puts place_ids << response.parsed_response["place_id"]
+  longlat[place]= response.parsed_response["results"][0]["geometry"]["location"]
+end
 
-
-
-
+ap longlat
 
 
 
